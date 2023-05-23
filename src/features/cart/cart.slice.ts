@@ -1,7 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { find } from 'lodash';
-
+import { RootState } from '../../store';
 
 export interface CartItem {
     id: number;
@@ -17,13 +16,12 @@ const initialState: CartState = {
     items: []
 };
 
-
 export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
         addItem: (state, action: PayloadAction<CartItem>) => {
-            const exists = find(state.items, (item: CartItem) => {
+            const exists = state.items.find((item: CartItem) => {
                 return item.id === action.payload.id;
             });
             if (!exists) {
@@ -33,5 +31,6 @@ export const cartSlice = createSlice({
     }
 });
 
+export const selectCart = (state: RootState) => state.cart.items;
 export const { addItem } = cartSlice.actions;
 export default cartSlice.reducer;

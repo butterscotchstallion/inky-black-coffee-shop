@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { CartItem, addItem } from './cart.slice';
 
@@ -13,8 +14,8 @@ export default function AddToCartButton({ item }: AddToCartProps) {
   }
 
   return (
-    <button type='button' onClick={onClick}>
+    <Button colorScheme='blue' onClick={onClick}>
       Add to cart
-    </button>
+    </Button>
   );
 }
