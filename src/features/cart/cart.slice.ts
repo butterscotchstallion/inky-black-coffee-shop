@@ -6,14 +6,17 @@ export interface CartItem {
     id: number;
     name: string;
     price: number;
+    description: string;
 }
 
 export interface CartState {
     items: CartItem[];
+    subtotal: string
 }
 
 const initialState: CartState = {
-    items: []
+    items: [],
+    subtotal: '0'
 };
 
 export const cartSlice = createSlice({
@@ -21,11 +24,14 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, action: PayloadAction<CartItem>) => {
-            const exists = state.items.find((item: CartItem) => {
-                return item.id === action.payload.id;
+            const item: CartItem = action.payload;
+            const exists = state.items.find((stateItem: CartItem) => {
+                return stateItem.id === item.id;
             });
             if (!exists) {
                 state.items.push(action.payload);
+                const newSubtotal = +state.subtotal + item.price;
+                state.subtotal = newSubtotal.toFixed(2);
             }
         }
     }

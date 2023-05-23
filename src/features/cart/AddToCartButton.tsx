@@ -1,6 +1,7 @@
 import { Button } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { CartItem, addItem } from './cart.slice';
+import { useState } from 'react';
 
 interface AddToCartProps {
   item: CartItem;
@@ -8,13 +9,15 @@ interface AddToCartProps {
 
 export default function AddToCartButton({ item }: AddToCartProps) {
   const dispatch = useDispatch();
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   function onClick() {
     dispatch(addItem(item));
+    setDisabled(false);
   }
 
   return (
-    <Button colorScheme='blue' onClick={onClick}>
+    <Button disabled={disabled} colorScheme='blue' onClick={onClick}>
       Add to cart
     </Button>
   );
