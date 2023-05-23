@@ -1,24 +1,14 @@
+import { Box, Container, Grid } from '@mui/material';
 import { useEffect } from 'react';
-import AddToCartButton from './features/cart/AddToCartButton';
+import './app.css';
 import CartContents from './features/cart/CartContents';
 import { CartItem } from './features/cart/cart.slice';
-import {
-  Grid,
-  Card,
-  CardHeader,
-  CardActions,
-  CardContent,
-  Container,
-  Typography,
-  Avatar,
-  IconButton,
-  Box,
-} from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import './app.css';
-import { red } from '@mui/material/colors';
-
-function App() {
+import { Item } from './features/grid/Item';
+import ProductList from './features/products/ProductList';
+interface AppProps {
+  theme: any;
+}
+function App({ theme }: AppProps) {
   useEffect(() => {
     document.title = 'Inky Black Coffee Shop';
   }, []);
@@ -49,6 +39,7 @@ function App() {
       description: 'Much bacon many cheese',
     },
   ];
+
   return (
     <Box
       component='main'
@@ -65,48 +56,19 @@ function App() {
       <Container maxWidth='xl' sx={{ mt: 4, mb: 4 }}>
         <Grid container>
           <Grid item xs={12}>
-            Header
+            <Item theme={theme}>
+              <h1>Inky Black Coffee Shop</h1>
+            </Item>
           </Grid>
 
           <Grid item xs={2}>
-            <CartContents />
+            <Item theme={theme}>
+              <CartContents />
+            </Item>
           </Grid>
 
           <Grid item xs={8}>
-            <Grid container spacing={3}>
-              <Grid item xs={4}>
-                {allItems.map((allItem: CartItem) => (
-                  <Card key={allItem.id} variant='outlined'>
-                    <CardHeader
-                      avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-                          {allItem.name[0]}
-                        </Avatar>
-                      }
-                      action={
-                        <IconButton aria-label='settings'>
-                          <MoreVertIcon />
-                        </IconButton>
-                      }
-                      title={allItem.name}
-                      subheader={'$' + allItem.price}
-                    />
-                    <CardContent>
-                      <Typography
-                        sx={{ fontSize: 14 }}
-                        color='text.secondary'
-                        gutterBottom
-                      >
-                        {allItem.description}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <AddToCartButton item={allItem} />
-                    </CardActions>
-                  </Card>
-                ))}
-              </Grid>
-            </Grid>
+            <ProductList theme={theme} items={allItems} />
           </Grid>
         </Grid>
       </Container>
