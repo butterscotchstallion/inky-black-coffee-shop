@@ -1,6 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
+import { sortBy } from 'lodash';
 
 export interface CartItem {
     id: number;
@@ -29,9 +30,17 @@ export const cartSlice = createSlice({
                 return stateItem.id === item.id;
             });
             if (!exists) {
+                // Add new item
                 state.items.push(action.payload);
+
+                // Update subtotal
                 const newSubtotal = +state.subtotal + item.price;
                 state.subtotal = newSubtotal.toFixed(2);
+
+                // Sort cart
+                state.items.sort((a: CartItem, b: CartItem) => {
+                    return b.price - a.price;
+                });
             }
         }
     }

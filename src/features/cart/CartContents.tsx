@@ -1,10 +1,4 @@
-import {
-    Table,
-    TableContainer,
-    Tbody,
-    Td,
-    Tr
-} from '@chakra-ui/react';
+import { Table, TableContainer, Tbody, Td, Tr } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { CartItem } from './cart.slice';
@@ -26,7 +20,9 @@ export default function CartContents() {
             </Tr>
           ))}
           <Tr>
-            <Td>Subtotal</Td>
+            <Td>
+              <strong>Subtotal</strong>
+            </Td>
             <Td>{subtotal}</Td>
           </Tr>
         </Tbody>

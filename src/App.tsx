@@ -37,6 +37,12 @@ function App() {
       name: 'Cold Brew',
       description: 'Strong and delicious cold brew',
     },
+    {
+      id: 4,
+      price: 3.99,
+      name: 'Double Cheesy Bacon Amalgamation',
+      description: 'Much bacon many cheese',
+    },
   ];
   return (
     <>
