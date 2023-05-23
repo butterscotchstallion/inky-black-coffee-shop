@@ -6,15 +6,13 @@ import { CartItem } from './features/cart/cart.slice';
 import { RootState } from './store';
 import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
 import theme from './theme';
+import CartContents from './features/cart/CartContents';
 
 function App() {
   useEffect(() => {
     document.title = 'Inky Black Coffee Shop';
   }, []);
-  const subtotal = useSelector((state: RootState) => state.cart.subtotal);
-  const items = useSelector((state: RootState) => {
-    return state.cart.items;
-  });
+
   const allItems: CartItem[] = [
     {
       id: 1,
@@ -41,20 +39,7 @@ function App() {
 
       <SimpleGrid columns={2} spacing={10}>
         <Box>
-          {items.length > 0 ? (
-            <>
-              <section>
-                {items.length} items - ${subtotal}
-              </section>
-              <ul>
-                {items.map((item: CartItem) => (
-                  <li key={item.id}>{item.name}</li>
-                ))}
-              </ul>
-            </>
-          ) : (
-            'No items in cart'
-          )}
+          <CartContents />
         </Box>
         <Box>
           <SimpleGrid
