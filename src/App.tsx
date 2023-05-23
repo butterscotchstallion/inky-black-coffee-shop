@@ -1,12 +1,17 @@
-import { Box, ColorModeScript, SimpleGrid } from '@chakra-ui/react';
+import {
+  Box,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  ColorModeScript,
+  SimpleGrid,
+} from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import AddToCartButton from './features/cart/AddToCartButton';
-import { CartItem } from './features/cart/cart.slice';
-import { RootState } from './store';
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
-import theme from './theme';
 import CartContents from './features/cart/CartContents';
+import { CartItem } from './features/cart/cart.slice';
+import theme from './theme';
 
 function App() {
   useEffect(() => {
