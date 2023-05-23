@@ -1,6 +1,4 @@
 import { useSelector } from 'react-redux';
-
-import './App.css';
 import AddToCartButton from './features/cart/AddToCartButton';
 import { CartItem } from './features/cart/cart.slice';
 import { RootState } from './store';
@@ -36,10 +34,10 @@ function App() {
         color='blackAlpha.700'
         fontWeight='bold'
       >
-        <GridItem pl='2' bg='orange.300' area={'header'}>
+        <GridItem pl='2' area={'header'}>
           Header
         </GridItem>
-        <GridItem pl='2' bg='pink.300' area={'nav'}>
+        <GridItem pl='2' area={'nav'}>
           {items.length > 0 ? (
             <ul>
               {items.map((item: CartItem) => (
@@ -50,10 +48,10 @@ function App() {
             'No items in cart'
           )}
         </GridItem>
-        <GridItem pl='2' bg='green.300' area={'main'}>
+        <GridItem pl='2' area={'main'}>
           <AddToCartButton item={item} />
         </GridItem>
-        <GridItem pl='2' bg='blue.300' area={'footer'}>
+        <GridItem pl='2' area={'footer'}>
           Footer
         </GridItem>
       </Grid>
