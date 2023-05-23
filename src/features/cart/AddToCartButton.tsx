@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { CartItem, addItem } from './cart.slice';
 import { useState } from 'react';
@@ -17,7 +17,7 @@ export default function AddToCartButton({ item }: AddToCartProps) {
   }
 
   return (
-    <Button disabled={disabled} colorScheme='blue' onClick={onClick}>
+    <Button disabled={disabled} onClick={onClick}>
       Add to cart
     </Button>
   );

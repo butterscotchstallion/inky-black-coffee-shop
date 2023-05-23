@@ -1,17 +1,21 @@
-import {
-  Box,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  ColorModeScript,
-  SimpleGrid,
-} from '@chakra-ui/react';
 import { useEffect } from 'react';
 import AddToCartButton from './features/cart/AddToCartButton';
 import CartContents from './features/cart/CartContents';
 import { CartItem } from './features/cart/cart.slice';
-import theme from './theme';
+import {
+  Grid,
+  Card,
+  CardHeader,
+  CardActions,
+  CardContent,
+  Container,
+  Typography,
+  Avatar,
+  IconButton,
+} from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import './app.css';
+import { red } from '@mui/material/colors';
 
 function App() {
   useEffect(() => {
@@ -45,33 +49,52 @@ function App() {
     },
   ];
   return (
-    <>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+    <Container maxWidth='xl' sx={{ mt: 4, mb: 4 }}>
+      <Grid>
+        <Grid item xs={12}>
+          Header
+        </Grid>
 
-      <SimpleGrid columns={2} spacing={10}>
-        <Box>
+        <Grid>
           <CartContents />
-        </Box>
-        <Box>
-          <SimpleGrid
-            spacing={4}
-            templateColumns='repeat(auto-fill, minmax(200px, 1fr))'
-          >
+        </Grid>
+
+        <Grid item>
+          <Grid item xs={2}>
             {allItems.map((allItem: CartItem) => (
-              <Card key={allItem.id}>
-                <CardHeader>
-                  {allItem.name} (${allItem.price})
-                </CardHeader>
-                <CardBody>{allItem.description}</CardBody>
-                <CardFooter>
+              <Card key={allItem.id} variant='outlined'>
+                <CardHeader
+                  avatar={
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
+                      {allItem.name[0]}
+                    </Avatar>
+                  }
+                  action={
+                    <IconButton aria-label='settings'>
+                      <MoreVertIcon />
+                    </IconButton>
+                  }
+                  title={allItem.name}
+                  subheader={'$' + allItem.price}
+                />
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 14 }}
+                    color='text.secondary'
+                    gutterBottom
+                  >
+                    {allItem.description}
+                  </Typography>
+                </CardContent>
+                <CardActions>
                   <AddToCartButton item={allItem} />
-                </CardFooter>
+                </CardActions>
               </Card>
             ))}
-          </SimpleGrid>
-        </Box>
-      </SimpleGrid>
-    </>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 

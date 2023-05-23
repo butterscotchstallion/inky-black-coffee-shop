@@ -1,7 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
-import { sortBy } from 'lodash';
 
 export interface CartItem {
     id: number;
