@@ -12,6 +12,7 @@ import {
   Typography,
   Avatar,
   IconButton,
+  Box,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import './app.css';
@@ -49,52 +50,67 @@ function App() {
     },
   ];
   return (
-    <Container maxWidth='xl' sx={{ mt: 4, mb: 4 }}>
-      <Grid>
-        <Grid item xs={12}>
-          Header
-        </Grid>
+    <Box
+      component='main'
+      sx={{
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'light'
+            ? theme.palette.grey[100]
+            : theme.palette.grey[900],
+        flexGrow: 1,
+        height: '100vh',
+        overflow: 'auto',
+      }}
+    >
+      <Container maxWidth='xl' sx={{ mt: 4, mb: 4 }}>
+        <Grid container>
+          <Grid item xs={12}>
+            Header
+          </Grid>
 
-        <Grid>
-          <CartContents />
-        </Grid>
-
-        <Grid item>
           <Grid item xs={2}>
-            {allItems.map((allItem: CartItem) => (
-              <Card key={allItem.id} variant='outlined'>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-                      {allItem.name[0]}
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label='settings'>
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title={allItem.name}
-                  subheader={'$' + allItem.price}
-                />
-                <CardContent>
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color='text.secondary'
-                    gutterBottom
-                  >
-                    {allItem.description}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <AddToCartButton item={allItem} />
-                </CardActions>
-              </Card>
-            ))}
+            <CartContents />
+          </Grid>
+
+          <Grid item xs={8}>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                {allItems.map((allItem: CartItem) => (
+                  <Card key={allItem.id} variant='outlined'>
+                    <CardHeader
+                      avatar={
+                        <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
+                          {allItem.name[0]}
+                        </Avatar>
+                      }
+                      action={
+                        <IconButton aria-label='settings'>
+                          <MoreVertIcon />
+                        </IconButton>
+                      }
+                      title={allItem.name}
+                      subheader={'$' + allItem.price}
+                    />
+                    <CardContent>
+                      <Typography
+                        sx={{ fontSize: 14 }}
+                        color='text.secondary'
+                        gutterBottom
+                      >
+                        {allItem.description}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <AddToCartButton item={allItem} />
+                    </CardActions>
+                  </Card>
+                ))}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Box>
   );
 }
 

@@ -4,6 +4,7 @@ import App from './App.tsx';
 import { store } from './store';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const theme = createTheme({
   palette: {
@@ -14,6 +15,7 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <App />
     </ThemeProvider>
   </Provider>
