@@ -11,12 +11,11 @@ import {
 } from '@mui/material';
 import { red } from '@mui/material/colors';
 import AddToCartButton from '../cart/AddToCartButton';
-import { CartItem } from '../cart/cart.slice';
-import { Item } from '../grid/Item';
+import './product.scss';
 
 export default function Product({ item }: any) {
   return (
-    <Card key={item.id} variant='outlined'>
+    <Card key={item.id} variant='outlined' className='product-card'>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
@@ -36,8 +35,10 @@ export default function Product({ item }: any) {
           {item.description}
         </Typography>
       </CardContent>
-      <CardActions>
-        <AddToCartButton item={item} />
+      <CardActions disableSpacing>
+        <Grid container justifyContent='flex-end'>
+          <AddToCartButton item={item} />
+        </Grid>
       </CardActions>
     </Card>
   );

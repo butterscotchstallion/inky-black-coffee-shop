@@ -1,0 +1,6 @@
+.fancy-button {
+    &:disabled {
+        opacity: 0.5;
+        border: 1px solid lime;
+    }
+}

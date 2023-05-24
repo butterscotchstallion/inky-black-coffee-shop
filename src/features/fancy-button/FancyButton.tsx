@@ -1,6 +1,6 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import './fancy-button.scss';
 
 const useStyles = makeStyles({
   root: {
@@ -9,12 +9,21 @@ const useStyles = makeStyles({
     borderRadius: 3,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
-    height: 48,
-    padding: '0 30px',
+    height: 40,
+    padding: '0 20px',
+    fontWeight: 'bold',
   },
 });
-
-export default function Hook() {
+export interface FancyButtonProps {
+  label: string;
+  onClick: CallableFunction;
+  disabled: boolean;
+}
+export default function FancyButton(props: any) {
   const classes = useStyles();
-  return <Button className={classes.root}>Hook</Button>;
+  return (
+    <Button {...props} className={classes.root}>
+      {props.children}
+    </Button>
+  );
 }

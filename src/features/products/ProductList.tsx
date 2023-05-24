@@ -1,28 +1,38 @@
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import {
-  Avatar,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Grid,
-  IconButton,
-  Typography,
-} from '@mui/material';
-import { red } from '@mui/material/colors';
-import AddToCartButton from '../cart/AddToCartButton';
+import { Grid } from '@mui/material';
 import { CartItem } from '../cart/cart.slice';
-import { Item } from '../grid/Item';
 import Product from './Product';
+import { Item } from '../grid/Item';
 
-interface ProductListParams {
-  items: CartItem[];
-  theme: any;
-}
+export default function ProductList({ theme }: any) {
+  const items: CartItem[] = [
+    {
+      id: 1,
+      price: 0.99,
+      name: 'Black Coffee',
+      description: 'Plain black coffee',
+    },
+    {
+      id: 2,
+      price: 4.99,
+      name: 'Cheesy Omelet',
+      description: 'Omelet with our secret three cheese blend',
+    },
+    {
+      id: 3,
+      price: 1.99,
+      name: 'Cold Brew',
+      description: 'Strong and delicious cold brew',
+    },
+    {
+      id: 4,
+      price: 3.99,
+      name: 'Double Cheesy Bacon Amalgamation',
+      description: 'Much bacon many cheese',
+    },
+  ];
 
-export default function ProductList({ theme, items }: ProductListParams) {
   return (
-    <Grid container spacing={3} gap={3}>
+    <Grid container spacing={3} flexDirection='row'>
       <Grid item xs={4}>
         <Item theme={theme}>
           {items.map((allItem: CartItem) => (

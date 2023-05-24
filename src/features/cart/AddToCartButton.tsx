@@ -1,7 +1,7 @@
-import { Button } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { CartItem, addItem } from './cart.slice';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import FancyButton from '../fancy-button/FancyButton';
+import { CartItem, addItem } from './cart.slice';
 
 interface AddToCartProps {
   item: CartItem;
@@ -17,8 +17,8 @@ export default function AddToCartButton({ item }: AddToCartProps) {
   }
 
   return (
-    <Button disabled={disabled} onClick={onClick}>
-      Add to cart
-    </Button>
+    <FancyButton disabled={disabled} onClick={onClick}>
+      Add To Cart
+    </FancyButton>
   );
 }

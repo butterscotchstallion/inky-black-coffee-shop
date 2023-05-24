@@ -9,4 +9,5 @@ export const Item = styled(Paper)(({ theme }: ItemProps) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    borderRadius: 0
 }));
