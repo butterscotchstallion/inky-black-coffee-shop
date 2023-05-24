@@ -1,7 +1,5 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
-import { without } from 'lodash';
 
 export interface CartItem {
     id: number;
@@ -12,7 +10,7 @@ export interface CartItem {
 
 export interface CartState {
     items: CartItem[];
-    subtotal: string
+    subtotal: string;
 }
 
 const initialState: CartState = {
@@ -26,7 +24,7 @@ export const cartSlice = createSlice({
     reducers: {
         removeItem: (state, action: PayloadAction<number>) => {
             state.items = state.items.filter((item: CartItem) => {
-                return item.id === action.payload;
+                return item.id !== action.payload;
             });
         },
         addItem: (state, action: PayloadAction<CartItem>) => {

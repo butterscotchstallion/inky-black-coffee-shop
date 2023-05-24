@@ -10,8 +10,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import './cart-contents.scss';
-import { CartItem } from './cart.slice';
 import { removeItem } from './cart.actions';
+import { CartItem } from './cart.slice';
 
 export default function CartContents() {
   const subtotal = useSelector((state: RootState) => state.cart.subtotal);
