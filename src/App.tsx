@@ -36,7 +36,7 @@ function App({ theme }: AppProps) {
 
         <Grid container>
           <Grid item xs={3}>
-            <Item theme={theme}>
+            <Item theme={theme} fullheight='true'>
               <CartContents />
             </Item>
           </Grid>

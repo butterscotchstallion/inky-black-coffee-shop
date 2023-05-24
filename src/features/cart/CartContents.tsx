@@ -26,7 +26,7 @@ export default function CartContents() {
 
   return (
     <section>
-      <h4>Cart</h4>
+      <h2>Cart</h2>
       {items.length > 0 ? (
         <TableContainer>
           <Table className='cart-contents-table'>
