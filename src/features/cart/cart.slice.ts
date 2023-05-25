@@ -22,9 +22,9 @@ const initialState: CartState = {
 };
 
 const getNewSubtotal = (state: any) => {
-    let subtotal: string = '0';
+    let subtotal: any = 0;
     state.items.map((item: CartItem) => {
-        subtotal += item.price * item.quantity;
+        subtotal += Number(item.price) * item.quantity;
     });
     subtotal = Number(subtotal).toFixed(2);
     return subtotal;
