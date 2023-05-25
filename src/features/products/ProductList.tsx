@@ -13,7 +13,7 @@ export default function ProductList({ theme }: any) {
       <Grid item xs={12} className='products-grid'>
         <Item theme={theme} fullheight='true'>
           <h2>Products</h2>
-          <Grid container>
+          <Grid container spacing={2}>
             {items.map((allItem: CartItem) => (
               <Grid key={allItem.id} item xs={4}>
                 <Product item={allItem} />

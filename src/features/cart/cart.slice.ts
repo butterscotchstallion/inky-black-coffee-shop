@@ -37,10 +37,10 @@ export const cartSlice = createSlice({
                 state.items.push(action.payload);
 
                 // Update subtotal
-                const newSubtotal = +state.subtotal + item.price;
+                const newSubtotal = Number(state.subtotal) + Number(item.price);
                 state.subtotal = newSubtotal.toFixed(2);
-
-                // Sort cart
+   
+                /* Sort cart */
                 state.items.sort((a: CartItem, b: CartItem) => {
                     return b.price - a.price;
                 });
