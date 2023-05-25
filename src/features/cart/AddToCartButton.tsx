@@ -15,9 +15,8 @@ export default function AddToCartButton({ item }: AddToCartProps) {
       qtyLimits[item.id] = 1;
     }
 
-    if (qtyLimits[item.id] <= CART_ITEM_QTY_LIMIT) {
+    if (item.quantity < CART_ITEM_QTY_LIMIT) {
       dispatch(addItem(item));
-      qtyLimits[item.id]++;
     }
   }
 

@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
-export const CART_ITEM_QTY_LIMIT = 3;
+export const CART_ITEM_QTY_LIMIT = 10;
 
 export interface CartItem {
     id: number;
@@ -56,6 +56,7 @@ export const cartSlice = createSlice({
             });
             if (existingItemIndex > -1) {
                 updateItemQuantityByIndex(state, existingItemIndex, quantity);
+                state.subtotal = getNewSubtotal(state);
             } else {
                 throw new Error("No such item in cart: "+itemId);
             }

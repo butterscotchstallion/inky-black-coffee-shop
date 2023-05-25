@@ -21,7 +21,10 @@ export default function CartContents() {
   const items: CartItem[] = useSelector((state: RootState) => {
     return state.cart.items;
   });
-  const quantities = [1, 2, 3];
+  const quantities: number[] = [];
+  for (let j = 1; j <= CART_ITEM_QTY_LIMIT; j++) {
+    quantities.push(j);
+  }
   const dispatch = useDispatch();
 
   function onDeleteClicked(itemId: number) {

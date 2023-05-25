@@ -1,4 +1,3 @@
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
   Avatar,
   Card,
@@ -6,7 +5,6 @@ import {
   CardContent,
   CardHeader,
   Grid,
-  IconButton,
   Typography,
 } from '@mui/material';
 import { red } from '@mui/material/colors';
