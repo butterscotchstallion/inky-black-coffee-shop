@@ -22,11 +22,6 @@ export default function Product({ item }: any) {
             {item.name[0]}
           </Avatar>
         }
-        action={
-          <IconButton aria-label='settings'>
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={item.name}
         subheader={'$' + item.price}
       />

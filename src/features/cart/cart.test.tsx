@@ -10,6 +10,7 @@ test('loads and displays add to cart button', async () => {
     name: 'Coffee',
     price: 0.99,
     description: 'hi',
+    quantity: 1,
   };
   const user = userEvent.setup();
   render(<AddToCartButton item={item} />);

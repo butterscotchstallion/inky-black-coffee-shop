@@ -10,7 +10,7 @@ Base = db.get_base()
 
 class Product(Base):
     """
-    User model
+    Product model
     """
     __tablename__ = 'products'
     id: Mapped[int] = mapped_column(Integer(), primary_key=True)
@@ -22,3 +22,14 @@ class Product(Base):
     updated_on = Column(DateTime(), default=datetime.now, onupdate=datetime.now)
     active = Column(Boolean, default=True)
     price = Column(Integer, default=0)
+    product_type_id = Column(Integer())
+
+
+class ProductType(Base):
+    """
+    Product Type model
+    """
+    __tablename__ = 'product_types'
+    id: Mapped[int] = mapped_column(Integer(), primary_key=True)
+    name = Column(String(20), nullable=False, index=True)
+

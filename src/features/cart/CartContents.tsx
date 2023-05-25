@@ -1,6 +1,9 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
+  FormControl,
   IconButton,
+  MenuItem,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -11,17 +14,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import './cart-contents.scss';
 import { removeItem } from './cart.actions';
-import { CartItem } from './cart.slice';
+import { CartItem, setItemQuantity } from './cart.slice';
 
 export default function CartContents() {
   const subtotal = useSelector((state: RootState) => state.cart.subtotal);
   const items: CartItem[] = useSelector((state: RootState) => {
     return state.cart.items;
   });
+  const quantities = [0, 1, 2, 3, 4, 5];
+  const maxQty = quantities[quantities.length - 1];
   const dispatch = useDispatch();
 
   function onDeleteClicked(itemId: number) {
     dispatch(removeItem(itemId));
+  }
+
+  function handleQuantityChange(e: any, item: CartItem) {
+    const qty = e.target.value;
+
+    if (qty > 0) {
+      if (item.quantity < 5) {
+        dispatch(
+          setItemQuantity({
+            itemId: item.id,
+            quantity: qty,
+          })
+        );
+      }
+    } else {
+      dispatch(removeItem(item.id));
+    }
   }
 
   return (
@@ -35,8 +57,26 @@ export default function CartContents() {
                 <TableRow key={item.id}>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.price}</TableCell>
+                  <TableCell width='15%'>
+                    <FormControl>
+                      <Select
+                        labelId='qty-label'
+                        id='qty-select'
+                        value={item.quantity}
+                        label='Quantity'
+                        onChange={(e) => handleQuantityChange(e, item)}
+                      >
+                        {quantities.map((q: number) => (
+                          <MenuItem key={q} value={q}>
+                            {q}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </TableCell>
                   <TableCell width='5%'>
                     <IconButton
+                      className='cart-delete-button'
                       onClick={() => onDeleteClicked(item.id)}
                       title='Remove item'
                       aria-label='delete'
@@ -50,8 +90,8 @@ export default function CartContents() {
                 <TableCell>
                   <strong>Subtotal</strong>
                 </TableCell>
-                <TableCell align='right' colSpan={2}>
-                  <strong>{subtotal}</strong>
+                <TableCell align='right' colSpan={3}>
+                  <strong>${subtotal}</strong>
                 </TableCell>
               </TableRow>
             </TableBody>

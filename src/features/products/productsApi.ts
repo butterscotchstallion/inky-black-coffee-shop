@@ -12,6 +12,7 @@ export const productsApi = createApi({
             transformResponse(baseQueryReturnValue: any[]) {
                 return baseQueryReturnValue.map((item: any) => {
                     item.price = item.price > 0 ? ((item.price / 100).toFixed(2)).toString() : '0';
+                    item.quantity = 1;
                     return item;
                 })
             }

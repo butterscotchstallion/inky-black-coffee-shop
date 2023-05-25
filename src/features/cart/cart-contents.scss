@@ -2,4 +2,11 @@
     tbody tr:last-child td {
         border: 0
     }
+
+    .cart-delete-button {
+        &:hover {
+            color: red;
+            background-color: transparent;
+        }
+    }
 }
