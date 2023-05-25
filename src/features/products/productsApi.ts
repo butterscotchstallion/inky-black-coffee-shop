@@ -8,7 +8,13 @@ export const productsApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
     endpoints: (builder) => ({
         getProducts: builder.query<CartItem[], void>({
-            query: () => `products`, 
+            query: () => `products`,
+            transformResponse(baseQueryReturnValue: any[]) {
+                return baseQueryReturnValue.map((item: any) => {
+                    item.price = item.price > 0 ? ((item.price / 100).toFixed(2)).toString() : '0';
+                    return item;
+                })
+            }
         }),
     }),
 });
