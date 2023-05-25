@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
+export const CART_ITEM_QTY_LIMIT = 3;
+
 export interface CartItem {
     id: number;
     name: string;
@@ -20,11 +22,11 @@ const initialState: CartState = {
 };
 
 const getNewSubtotal = (state: any) => {
-    let subtotal: string | number = 0;
+    let subtotal: string = '0';
     state.items.map((item: CartItem) => {
         subtotal += item.price * item.quantity;
     });
-    subtotal = subtotal.toFixed(2);
+    subtotal = Number(subtotal).toFixed(2);
     return subtotal;
 };
 

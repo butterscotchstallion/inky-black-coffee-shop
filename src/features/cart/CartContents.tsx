@@ -14,15 +14,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import './cart-contents.scss';
 import { removeItem } from './cart.actions';
-import { CartItem, setItemQuantity } from './cart.slice';
+import { CART_ITEM_QTY_LIMIT, CartItem, setItemQuantity } from './cart.slice';
 
 export default function CartContents() {
   const subtotal = useSelector((state: RootState) => state.cart.subtotal);
   const items: CartItem[] = useSelector((state: RootState) => {
     return state.cart.items;
   });
-  const quantities = [0, 1, 2, 3, 4, 5];
-  const maxQty = quantities[quantities.length - 1];
+  const quantities = [1, 2, 3];
   const dispatch = useDispatch();
 
   function onDeleteClicked(itemId: number) {
@@ -33,14 +32,12 @@ export default function CartContents() {
     const qty = e.target.value;
 
     if (qty > 0) {
-      if (item.quantity < 5) {
-        dispatch(
-          setItemQuantity({
-            itemId: item.id,
-            quantity: qty,
-          })
-        );
-      }
+      dispatch(
+        setItemQuantity({
+          itemId: item.id,
+          quantity: qty,
+        })
+      );
     } else {
       dispatch(removeItem(item.id));
     }

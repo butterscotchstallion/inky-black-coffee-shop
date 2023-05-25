@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import FancyButton from '../fancy-button/FancyButton';
-import { CartItem, addItem } from './cart.slice';
+import { CART_ITEM_QTY_LIMIT, CartItem, addItem } from './cart.slice';
 
 interface AddToCartProps {
   item: CartItem;
@@ -8,9 +8,17 @@ interface AddToCartProps {
 
 export default function AddToCartButton({ item }: AddToCartProps) {
   const dispatch = useDispatch();
+  const qtyLimits: any = {};
 
   function onClick() {
-    dispatch(addItem(item));
+    if (!(Number(item.id) in qtyLimits)) {
+      qtyLimits[item.id] = 1;
+    }
+
+    if (qtyLimits[item.id] <= CART_ITEM_QTY_LIMIT) {
+      dispatch(addItem(item));
+      qtyLimits[item.id]++;
+    }
   }
 
   return <FancyButton onClick={onClick}>Add To Cart</FancyButton>;
