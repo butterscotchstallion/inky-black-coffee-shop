@@ -6,32 +6,6 @@ import { useGetProductsQuery } from './productsApi';
 import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ProductList({ theme }: any) {
-  /*const items: CartItem[] = [
-    {
-      id: 1,
-      price: 0.99,
-      name: 'Black Coffee',
-      description: 'Plain black coffee',
-    },
-    {
-      id: 2,
-      price: 4.99,
-      name: 'Cheesy Omelet',
-      description: 'Omelet with our secret three cheese blend',
-    },
-    {
-      id: 3,
-      price: 1.99,
-      name: 'Cold Brew',
-      description: 'Strong and delicious cold brew',
-    },
-    {
-      id: 4,
-      price: 3.99,
-      name: 'Double Cheesy Bacon Amalgamation',
-      description: 'Much bacon many cheese',
-    },
-  ];*/
   const { data: items = [], error, isLoading } = useGetProductsQuery();
 
   return (
@@ -41,7 +15,7 @@ export default function ProductList({ theme }: any) {
           <h2>Products</h2>
           <Grid container>
             {items.map((allItem: CartItem) => (
-              <Grid item xs={4} key={allItem.id}>
+              <Grid key={allItem.id} item xs={4}>
                 <Product item={allItem} />
               </Grid>
             ))}

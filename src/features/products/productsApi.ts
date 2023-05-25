@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CartItem } from '../cart/cart.slice';
 
-const baseUrl = 'http://127.0.0.1:5174/';
+const baseUrl = 'http://localhost:8000/api/';
 
 export const productsApi = createApi({
     reducerPath: 'productsApi',
