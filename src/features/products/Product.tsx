@@ -5,6 +5,7 @@ import {
   CardContent,
   CardHeader,
   Grid,
+  Paper,
   Typography,
 } from '@mui/material';
 import { red } from '@mui/material/colors';
@@ -24,12 +25,14 @@ export default function Product({ item }: any) {
         subheader={'$' + item.price}
       />
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-          {item.description}
-        </Typography>
+        <Paper className='product-paper-wrapper'>
+          <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
+            {item.description}
+          </Typography>
+        </Paper>
       </CardContent>
       <CardActions disableSpacing>
-        <Grid container justifyContent='flex-end'>
+        <Grid container justifyContent='flex-end' padding={1}>
           <AddToCartButton item={item} />
         </Grid>
       </CardActions>

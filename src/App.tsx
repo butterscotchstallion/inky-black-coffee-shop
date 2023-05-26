@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Paper } from '@mui/material';
 import { useEffect } from 'react';
 import './app.css';
 import CartContents from './features/cart/CartContents';
@@ -21,7 +21,6 @@ function App({ theme }: AppProps) {
             ? theme.palette.grey[100]
             : theme.palette.grey[900],
         flexGrow: 1,
-        height: '100vh',
         overflow: 'auto',
       }}
     >
@@ -36,9 +35,7 @@ function App({ theme }: AppProps) {
 
         <Grid container>
           <Grid item xs={3}>
-            <Item theme={theme} fullheight='true'>
-              <CartContents />
-            </Item>
+            <CartContents />
           </Grid>
 
           <Grid item xs={9}>

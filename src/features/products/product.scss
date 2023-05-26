@@ -1,4 +1,9 @@
-.products-grid,
 .product-card {
-    text-align: left;
+    &:hover {
+        border: 1px solid #666;
+    }
+
+    .product-paper-wrapper {
+        padding: 1rem;
+    }
 }

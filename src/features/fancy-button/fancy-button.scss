@@ -1,7 +1,18 @@
 .fancy-button {
+    &:hover {
+        transform-origin: bottom right;
+        animation: scale 500ms ease-in-out forwards;
+    }
 
     &:disabled {
         opacity: 0.5;
-        border: 1px solid lime;
+        background-color: #666;
+        color: #fff;
+    }
+}
+
+@keyframes scale {
+    to {
+        transform: scale(1.1);
     }
 }

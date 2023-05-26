@@ -22,7 +22,7 @@ export interface FancyButtonProps {
 export default function FancyButton(props: any) {
   const classes = useStyles();
   return (
-    <Button {...props} className={classes.root}>
+    <Button {...props} className={['fancy-button', classes.root].join(' ')}>
       {props.children}
     </Button>
   );

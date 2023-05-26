@@ -3,6 +3,7 @@ import {
   FormControl,
   IconButton,
   MenuItem,
+  Paper,
   Select,
   Table,
   TableBody,
@@ -47,59 +48,57 @@ export default function CartContents() {
   }
 
   return (
-    <section>
+    <TableContainer className='cart-contents-area' component={Paper}>
       <h2>Cart</h2>
       {items.length > 0 ? (
-        <TableContainer>
-          <Table className='cart-contents-table'>
-            <TableBody>
-              {items.map((item: CartItem) => (
-                <TableRow key={item.id}>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.price}</TableCell>
-                  <TableCell width='15%'>
-                    <FormControl>
-                      <Select
-                        labelId='qty-label'
-                        id='qty-select'
-                        value={item.quantity}
-                        label='Quantity'
-                        onChange={(e) => handleQuantityChange(e, item)}
-                      >
-                        {quantities.map((q: number) => (
-                          <MenuItem key={q} value={q}>
-                            {q}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </TableCell>
-                  <TableCell width='5%'>
-                    <IconButton
-                      className='cart-delete-button'
-                      onClick={() => onDeleteClicked(item.id)}
-                      title='Remove item'
-                      aria-label='delete'
+        <Table className='cart-contents-table'>
+          <TableBody>
+            {items.map((item: CartItem) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.price}</TableCell>
+                <TableCell width='15%'>
+                  <FormControl>
+                    <Select
+                      labelId='qty-label'
+                      id='qty-select'
+                      value={item.quantity}
+                      label='Quantity'
+                      onChange={(e) => handleQuantityChange(e, item)}
                     >
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-              <TableRow>
-                <TableCell>
-                  <strong>Subtotal</strong>
+                      {quantities.map((q: number) => (
+                        <MenuItem key={q} value={q}>
+                          {q}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </TableCell>
-                <TableCell align='right' colSpan={3}>
-                  <strong>${subtotal}</strong>
+                <TableCell width='5%'>
+                  <IconButton
+                    className='cart-delete-button'
+                    onClick={() => onDeleteClicked(item.id)}
+                    title='Remove item'
+                    aria-label='delete'
+                  >
+                    <DeleteIcon />
+                  </IconButton>
                 </TableCell>
               </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+            ))}
+            <TableRow>
+              <TableCell>
+                <strong>Subtotal</strong>
+              </TableCell>
+              <TableCell align='right' colSpan={3}>
+                <strong>${subtotal}</strong>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       ) : (
         <span>No items in cart</span>
       )}
-    </section>
+    </TableContainer>
   );
 }

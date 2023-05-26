@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
-export const CART_ITEM_QTY_LIMIT = 10;
+export const CART_ITEM_QTY_LIMIT = 3;
 
 export interface CartItem {
     id: number;
