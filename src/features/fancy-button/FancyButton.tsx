@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import './fancy-button.scss';
 
 const useStyles = makeStyles({
@@ -23,7 +24,7 @@ export default function FancyButton(props: any) {
   const classes = useStyles();
   return (
     <Button {...props} className={['fancy-button', classes.root].join(' ')}>
-      {props.children}
+      <AddShoppingCartIcon /> {props.children}
     </Button>
   );
 }

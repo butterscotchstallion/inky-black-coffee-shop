@@ -21,6 +21,11 @@ export default function Product({ item }: any) {
             {item.name[0]}
           </Avatar>
         }
+        action={
+          <Grid container justifyContent='flex-end' padding={1}>
+            <AddToCartButton item={item} />
+          </Grid>
+        }
         title={item.name}
         subheader={'$' + item.price}
       />
@@ -31,11 +36,6 @@ export default function Product({ item }: any) {
           </Typography>
         </Paper>
       </CardContent>
-      <CardActions disableSpacing>
-        <Grid container justifyContent='flex-end' padding={1}>
-          <AddToCartButton item={item} />
-        </Grid>
-      </CardActions>
     </Card>
   );
 }
