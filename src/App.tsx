@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Paper } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 import { useEffect } from 'react';
 import './app.css';
 import CartContents from './features/cart/CartContents';
