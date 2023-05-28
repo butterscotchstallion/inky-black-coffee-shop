@@ -30,6 +30,10 @@ const getNewSubtotal = (state: any) => {
     return subtotal;
 };
 
+const recalculateSubtotal = (state: any) => {
+    state.subtotal = getNewSubtotal(state);
+};
+
 const updateItemQuantityByIndex = (state: any, itemIndex: number, quantity = 1) => {
     state.items[itemIndex].quantity = quantity;
 };
@@ -47,7 +51,7 @@ export const cartSlice = createSlice({
             state.items = state.items.filter((item: CartItem) => {
                 return item.id !== action.payload;
             });
-            state.subtotal = getNewSubtotal(state)
+            recalculateSubtotal(state);
         },
         setItemQuantity: (state, action: PayloadAction<setItemQuantityPayload>) => {
             const {itemId, quantity} = action.payload;
@@ -56,7 +60,7 @@ export const cartSlice = createSlice({
             });
             if (existingItemIndex > -1) {
                 updateItemQuantityByIndex(state, existingItemIndex, quantity);
-                state.subtotal = getNewSubtotal(state);
+                recalculateSubtotal(state);
             } else {
                 throw new Error("No such item in cart: "+itemId);
             }
@@ -69,10 +73,10 @@ export const cartSlice = createSlice({
             if (existingItemIndex > -1) {
                 const existingItem = state.items[existingItemIndex];
                 updateItemQuantityByIndex(state, existingItemIndex, ++existingItem.quantity);
-                state.subtotal = getNewSubtotal(state);
+                recalculateSubtotal(state);
             } else {
                 state.items.push(action.payload);
-                state.subtotal = getNewSubtotal(state);
+                recalculateSubtotal(state);
             }
             state.items.sort((a: CartItem, b: CartItem) => {
                 return b.price - a.price;

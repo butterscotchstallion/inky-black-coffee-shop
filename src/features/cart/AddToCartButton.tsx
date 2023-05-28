@@ -33,8 +33,6 @@ export default function AddToCartButton({ item }: AddToCartProps) {
       className={disabled ? 'disabled' : ''}
       disabled={disabled}
       onClick={onClick}
-    >
-      Add
-    </FancyButton>
+    ></FancyButton>
   );
 }
