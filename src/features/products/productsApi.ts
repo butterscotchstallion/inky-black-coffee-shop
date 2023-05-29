@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { Api, CreateApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CartItem } from '../cart/cart.slice';
 
 const baseUrl = 'http://localhost:8000/api/';

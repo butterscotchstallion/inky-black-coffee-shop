@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
-export const CART_ITEM_QTY_LIMIT = 3;
+export const CART_ITEM_QTY_LIMIT = 5;
 
 export interface CartItem {
     id: number;
@@ -71,10 +71,12 @@ export const cartSlice = createSlice({
                 return stateItem.id === item.id;
             });
             if (existingItemIndex > -1) {
-                const existingItem = state.items[existingItemIndex];
-                updateItemQuantityByIndex(state, existingItemIndex, ++existingItem.quantity);
+                const newQty = state.items[existingItemIndex].quantity + 1;
+                console.log(`updating item ${item.id} with qty ${newQty}`);
+                updateItemQuantityByIndex(state, existingItemIndex, newQty);
                 recalculateSubtotal(state);
             } else {
+                console.log('adding new item');
                 state.items.push(action.payload);
                 recalculateSubtotal(state);
             }
@@ -85,6 +87,18 @@ export const cartSlice = createSlice({
     }
 });
 
+export const selectAddToCartDisabled = (state: RootState, itemId: number) => {
+    if (state.cart.items.length === 0) {
+        return false;
+    }
+    const storeItem = state.cart.items.find((item: CartItem) => {
+        return item.id === itemId;
+    });
+    if (!storeItem) {
+        console.warn('Item#'+itemId+' not found!');
+    }
+    return storeItem ? storeItem.quantity >= CART_ITEM_QTY_LIMIT : false;
+};
 export const selectCart = (state: RootState) => state.cart.items;
 export const { addItem, removeItem, setItemQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
