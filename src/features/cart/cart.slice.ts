@@ -72,11 +72,9 @@ export const cartSlice = createSlice({
             });
             if (existingItemIndex > -1) {
                 const newQty = state.items[existingItemIndex].quantity + 1;
-                console.log(`updating item ${item.id} with qty ${newQty}`);
                 updateItemQuantityByIndex(state, existingItemIndex, newQty);
                 recalculateSubtotal(state);
             } else {
-                console.log('adding new item');
                 state.items.push(action.payload);
                 recalculateSubtotal(state);
             }

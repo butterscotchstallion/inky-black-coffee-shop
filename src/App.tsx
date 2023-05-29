@@ -34,12 +34,12 @@ function App({ theme }: AppProps) {
         </Grid>
 
         <Grid container>
-          <Grid item xs={3}>
-            <CartContents />
-          </Grid>
-
           <Grid item xs={9}>
             <ProductList />
+          </Grid>
+
+          <Grid item xs={3}>
+            <CartContents />
           </Grid>
         </Grid>
       </Container>

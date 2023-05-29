@@ -12,12 +12,12 @@ export default function AddToCartButton({ item }: AddToCartProps) {
   const dispatch = useDispatch();
   const disabled = selectAddToCartDisabled(store.getState(), item.id);
   const [clicks, setClicks] = useState<number>(0);
-
   function onClick() {
     dispatch(addItem(item));
     const numClicks = clicks + 1;
     setClicks(numClicks);
   }
+
   return (
     <FancyButton
       className={disabled ? 'disabled' : ''}
