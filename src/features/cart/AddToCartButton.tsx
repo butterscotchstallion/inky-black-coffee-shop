@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FancyButton from '../fancy-button/FancyButton';
 import { CART_ITEM_QTY_LIMIT, CartItem, addItem } from './cart.slice';
-import { store } from '../../store';
 
 interface AddToCartProps {
   item: CartItem;
