@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
 export const CART_ITEM_QTY_LIMIT = 5;
+export const TAX_RATE = .06;
 
 export interface CartItem {
     id: number;
@@ -21,21 +22,21 @@ const initialState: CartState = {
     subtotal: '0',
 };
 
-const getNewSubtotal = (state: any) => {
+const getNewSubtotal = (state: RootState): string => {
     let subtotal: any = 0;
-    state.items.map((item: CartItem) => {
+    state.cart.items.map((item: CartItem) => {
         subtotal += Number(item.price) * item.quantity;
     });
-    subtotal = Number(subtotal).toFixed(2);
+    subtotal = Number(subtotal * TAX_RATE).toFixed(2);
     return subtotal;
 };
 
-const recalculateSubtotal = (state: any) => {
+const recalculateSubtotal = (state: RootState): void => {
     state.subtotal = getNewSubtotal(state);
 };
 
-const updateItemQuantityByIndex = (state: any, itemIndex: number, quantity = 1) => {
-    state.items[itemIndex].quantity = quantity;
+const updateItemQuantityByIndex = (state: RootState, itemIndex: number, quantity = 1): void => {
+    state.cart.items[itemIndex].quantity = quantity;
 };
 
 interface setItemQuantityPayload {
@@ -47,15 +48,15 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        removeItem: (state, action: PayloadAction<number>) => {
-            state.items = state.items.filter((item: CartItem) => {
+        removeItem: (state: RootState, action: PayloadAction<number>) => {
+            state.items = state.cart.items.filter((item: CartItem) => {
                 return item.id !== action.payload;
             });
             recalculateSubtotal(state);
         },
-        setItemQuantity: (state, action: PayloadAction<setItemQuantityPayload>) => {
+        setItemQuantity: (state: RootState, action: PayloadAction<setItemQuantityPayload>) => {
             const {itemId, quantity} = action.payload;
-            const existingItemIndex = state.items.findIndex((stateItem: CartItem) => {
+            const existingItemIndex = state.cart.items.findIndex((stateItem: CartItem) => {
                 return stateItem.id === itemId;
             });
             if (existingItemIndex > -1) {
@@ -65,10 +66,9 @@ export const cartSlice = createSlice({
                 throw new Error("No such item in cart: "+itemId);
             }
         },
-        addItem: (state, action: PayloadAction<CartItem>) => {
-            const item: CartItem = action.payload;
+        addItem: (state: RootState, action: PayloadAction<CartItem>) => {
             const existingItemIndex = state.items.findIndex((stateItem: CartItem) => {
-                return stateItem.id === item.id;
+                return stateItem.id === action.payload.id;
             });
             if (existingItemIndex > -1) {
                 const newQty = state.items[existingItemIndex].quantity + 1;
