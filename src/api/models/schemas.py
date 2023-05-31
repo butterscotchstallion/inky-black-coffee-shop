@@ -16,3 +16,11 @@ class ProductBase(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class ProductTypes(BaseModel):
+    id: int
+    name: str
+
+    class Config:
+        orm_mode = True
