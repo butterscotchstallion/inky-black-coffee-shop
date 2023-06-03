@@ -88,6 +88,14 @@ export default function CartContents() {
             ))}
             <TableRow>
               <TableCell>
+                <strong>Tax</strong>
+              </TableCell>
+              <TableCell align='right' colSpan={3}>
+                <strong>${tax}</strong>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
                 <strong>Subtotal</strong>
               </TableCell>
               <TableCell align='right' colSpan={3}>
